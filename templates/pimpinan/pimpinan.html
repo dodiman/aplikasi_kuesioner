@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename="halaman_utama.css") }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename="halaman_kuis.css") }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename="halaman_pimpinan.css") }}" />
+{% endblock %}
+
+{% block content %}
+
+{% include "include/logout.html" %}
+
+
+<div class="kotak-judul">
+    <h2>Laporan</h2>
+    <br />
+</div>
+
+<div class="kotak-tabel">
+
+    <table>
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Kategori</th>
+            <th>Kuesioner</th>
+            <th>Ya</th>
+            <th>Tidak</th>
+            <th>Bukti Pelaksanaan</th>
+        </tr>
+    </thead>
+    <tbody id="tbody">
+        {% for value in laporan %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ value.kategori }}</td>
+            <td>{{ value.teks }}</td>
+            <td id="jawaban_benar" class="kolom-centang">
+                {% if value.jawaban == "Benar" %}
+                <img src="{{ url_for('static', filename='img/centang.png') }}" alt="centang" class="gambar-centang">
+                {% endif %}
+            </td>
+            <td id="jawaban_salah" class="kolom-centang">
+                {% if not value.jawaban == "Benar" %}
+                <img src="{{ url_for('static', filename='img/centang.png') }}" alt="centang" class="gambar-centang">
+                
+                {% endif %}
+            </td>
+            <td>{{ value.responden }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+    
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename="js/axios.min.js") }}"></script>
+<script src="{{ url_for('static', filename="js/pimpinan/laporan.js") }}"></script>
+
+{% endblock %}

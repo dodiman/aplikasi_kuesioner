@@ -1,0 +1,29 @@
+@import 'mixin_utama';
+
+.kotak-judul {
+    // @include garis;
+    margin: 0 20px;
+    padding: 10px 0;
+
+    h2 {
+        font-size: #233aea;
+        color: rgb(11, 30, 134);
+        font-weight: 900;
+    }
+}
+
+.gambar-centang {
+    // @include garis;
+    width: 20px;
+    height: auto;
+}
+
+.kolom-centang {
+    // background-color: red;
+    width: 80px;
+    overflow: hidden;
+}
+
+.menu {
+    top: 10px;
+}

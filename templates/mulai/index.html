@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename="halaman_utama.css") }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename="mulai.css") }}" />
+{% endblock %}
+
+{% block content %}
+{% include "include/header.html" %}
+{% include "include/logout.html" %}
+
+
+    <div class="kotak-konten">
+
+        {# include "include/sidebar.html" #}
+        
+        
+        
+        <div class="kotak-mulai">
+            <div class="kotak-bg">
+                <img class="gambar_icon" src="{{ url_for('static', filename='img/responden.png') }}" alt="gambar">
+                <a class="tombol_link" href="{{ url_for('mulai.halaman_kuis') }}"">Kuis</a>
+            </div>
+            
+        </div>
+
+        <div class="kotak-mulai">
+            <div class="kotak-bg">
+                <img class="gambar_icon" src="{{ url_for('static', filename='img/responden.png') }}" alt="gambar">
+                <a class="tombol_link" href="{{ url_for('mulai.halaman_kategori') }}"">Kategori</a>
+            </div>
+            
+        </div>
+        
+        
+    </div>
+{% endblock %}

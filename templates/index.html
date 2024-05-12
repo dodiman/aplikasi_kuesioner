@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename="halaman_utama.css") }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename="halaman_index.css") }}" />
+{% endblock %}
+
+{% block content %}
+    {% include "include/header.html" %}
+
+    <div class="kotak-judul-skripsi">
+        <h2>INI ADALAH JUDUL SKRIPSI</h2>
+        <h5>FAKULTAS MATEMATIKA DAN ILMU PENGETAHUAN ALAM</h5>
+    </div>
+
+    <div class="kotak-konten">
+
+        {# include "include/sidebar.html" #}
+        
+        
+        
+        <div class="kotak-mulai">
+            <div class="kotak-bg">
+                <img class="gambar_icon" src="{{ url_for('static', filename='img/responden.png') }}" alt="gambar">
+                <a class="tombol_link" href="{{ url_for('mulai.halaman_responden') }}">Responden</a>
+            </div>
+            <div class="kotak-bg">
+                <img class="gambar_icon" src="{{ url_for('static', filename='img/admin.png') }}" alt="gambar">
+                <a class="tombol_link" href="{{ url_for('mulai.halaman_mulai') }}">Admin</a>
+            </div>
+            <div class="kotak-bg">
+                <img class="gambar_icon" src="{{ url_for('static', filename='img/pimpinan.png') }}" alt="gambar">
+                <a class="tombol_link" href="{{ url_for('mulai.halaman_pimpinan') }}">Pimpinan</a>
+            </div>
+        </div>
+        
+        
+    </div>
+{% endblock %}

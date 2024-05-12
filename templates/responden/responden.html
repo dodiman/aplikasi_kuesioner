@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename="halaman_utama.css") }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename="halaman_responden.css") }}" />
+
+{% endblock %}
+
+{% block content %}
+{% include "include/menu_responden.html" %}
+
+
+    <div class="form-tambah" id="kotak_biodata">
+        <div class="header">
+            <h2>Form Biodata Diri</h2>
+        </div>
+        <form method="post" id="form_biodata" class="myform">
+            <div class="input">
+                <label for="nama">
+                    nama
+                </label>
+                <input name="nama" id="nama" type="text" placeholder="..." required />
+            </div>
+            <div class="input">
+                <label for="nama">
+                    alamat
+                </label>
+                <input name="alamat" id="alamat" type="text" placeholder="..." required />
+            </div>
+            <div class="input">
+                <span></span>
+                <button>simpan</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="kuesioner" id="kotak_kuis">
+        
+    </div>
+
+    
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename="js/axios.min.js") }}"></script>
+<script src="{{ url_for('static', filename="js/responden/responden.js") }}"></script>
+
+{% endblock %}

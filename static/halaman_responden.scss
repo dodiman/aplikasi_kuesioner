@@ -1,0 +1,157 @@
+@import 'mixin_utama';
+
+.form-tambah {
+    // @include garis;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    background-color: white;
+    width: 35%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+
+    .header {
+        h2 {
+            text-transform: uppercase;
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            font-size: large;
+        }
+        border-bottom: 1px dashed rgb(78, 76, 76);
+    }
+
+    .myform {
+        // @include garis;
+        padding: 10px 30px;
+        display: flex;
+        flex-wrap: wrap;
+
+        .input {
+            // @include garis;
+            width: 100%;
+            display: flex;
+            gap: 10px;
+            justify-content: start;
+            background-color: transparent;
+            margin-bottom: 10px;
+            
+            label, span {
+                // @include garis;
+                
+                color: #484541;
+                padding: 10px;
+                font-size: large;
+                width: 25%;
+                text-align: left;
+                text-transform: capitalize;
+            }
+
+            input {
+                // width: 50%;
+                flex-grow: 1;
+                padding: 10px;
+                border: 1px solid #ccc;
+
+                &:focus {
+                    outline: 2px solid rgb(206, 166, 166);
+                }
+
+            }
+
+            button {
+                flex-grow: 1;
+                padding: 10px;
+                border: 1px solid #ccc;
+                background-color: #BED8FB;
+                cursor: pointer;
+                text-transform: capitalize;
+
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+}
+
+.kuesioner {
+    // @include garis;
+    // background-color: white;
+    padding: 10px 20px;
+
+    h2 {
+        @include garis;
+        width: 100%;
+        padding: 10px 20px;
+        background-color: transparent;
+        color: black;
+        text-align: left;
+    }
+
+    form {
+        // @include garis;
+        background-color: transparent;
+        margin-top: 10px;
+        // padding: 10px 20px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        .group {
+            box-shadow: 0 7px 15px 0 rgba(0, 0, 0, .13), 0 1px 4px 0 rgba(0, 0, 0, .11);
+            // @include garis;
+            width: 100%;
+            background-color: white;
+            padding: 10px 20px;
+        }
+
+        p {
+            // @include garis;
+            width: 100%;
+            white-space: normal;
+            margin-bottom: 10px;
+            font-size: large;
+        }
+
+        .pilihan {
+            // @include garis;
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            display: flex;
+            background-color: transparent;
+            gap: 5px;
+
+            input {
+                cursor: pointer;
+            }
+
+            label {
+                font-size: large;
+                margin-right: 10px;
+                cursor: pointer;
+
+            }
+
+        }
+
+        button {
+            padding: 10px 20px;
+            text-transform: uppercase;
+            background-color: #BED8FB;
+            font-size: large;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+    }
+}
+
+.menu {
+    top: 10px;
+}

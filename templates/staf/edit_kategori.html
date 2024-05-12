@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename="halaman_utama.css") }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename="halaman_kuis.css") }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename="halaman_edit_kuis.css") }}" />
+{% endblock %}
+
+{% block content %}
+    <div class="aksi">
+        <a href="{{ url_for('mulai.halaman_kategori') }}">kembali</a>
+    </div>
+
+    <div class="form-tambah-kuis">
+        <div class="header">
+            <h2>Edit Kategori</h2>
+        </div>
+        <form method="post" id="myform" class="myform">
+            <div class="input">
+                <label for="kategori">
+                    Kategori
+                </label>
+                <input autofocus name="kategori" id="kategori" type="text" value="{{ kategori.kategori }}" placeholder="..." required />
+               
+            </div>
+            <div class="input">
+                <span></span>
+                <button>simpan</button>
+            </div>
+        </form>
+    </div>
+
+    
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename="js/axios.min.js") }}"></script>
+<script src="{{ url_for('static', filename="js/staf/edit_kategori.js") }}"></script>
+
+{% endblock %}

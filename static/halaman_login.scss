@@ -1,0 +1,100 @@
+@import 'mixin_utama';
+
+.kotak-login {
+    // @include garis;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    // background-color: red;
+    width: 100%;
+    margin-top: 40px;
+
+    .form-login {
+        // @include garis;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+        box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+        background-color: white;
+        padding: 50px;
+        border-radius: 10px;
+
+        width: 550px;
+
+        .header {
+            // @include garis;
+            // text-align: center;
+            // width: 100%;
+            margin-bottom: 30px;
+
+            .gambar_icon {
+                // @include garis;
+                width: 200px;
+                height: auto;
+                object-fit: cover;
+            }
+
+        }
+        .input {
+            // @include garis;
+            width: 100%;
+            display: flex;
+            gap: 10px;
+            justify-content: start;
+            background-color: transparent;
+            margin-bottom: 10px;
+            
+            label, span {
+                // @include garis;
+                
+                color: #484541;
+                padding: 10px;
+                font-size: large;
+                width: 25%;
+                text-align: left;
+                text-transform: capitalize;
+            }
+
+            input {
+                // width: 50%;
+                flex-grow: 1;
+                padding: 10px;
+                border: 1px solid #ccc;
+
+                &:focus {
+                    outline: 2px solid rgb(206, 166, 166);
+                }
+
+            }
+
+            button {
+                flex-grow: 1;
+                padding: 10px;
+                border: 1px solid #ccc;
+                background-color: #BED8FB;
+                cursor: pointer;
+                text-transform: capitalize;
+
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+}
+
+.link-halaman-utama {
+    // background-color: red;
+    // @include garis;
+    position: fixed;
+    bottom: 55px;
+    margin-top: 10px;
+    &:hover {
+        text-decoration: underline;
+        
+    }
+}

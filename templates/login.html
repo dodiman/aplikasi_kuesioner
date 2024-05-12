@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename="halaman_login.css") }}" />
+
+{% endblock %}
+
+
+{% block content %}
+<div class="kotak-login">
+    <form method="post" class="form-login">
+        <div class="header">
+            <img class="gambar_icon" src="{{ url_for('static',filename='img/user2.png') }}" alt="gambar-icon">
+        </div>
+        <div class="input">
+            <label for="username">username</label>
+            <input type="text" name="username" id="username" autofocus required placeholder="...">
+        </div>
+        <div class="input">
+
+            <label for="password">password</label>
+            <input type="text" name="password" id="password" required placeholder="...">
+        </div>
+        <div class="input">
+            <span></span>
+            <button>Login</button>
+        </div>
+        <a class="link-halaman-utama" href="{{ url_for('aplikasiku.halaman_utama') }}">kembali ke halaman utama</a>
+    </form>
+</div>
+{% endblock %}

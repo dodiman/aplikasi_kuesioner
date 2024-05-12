@@ -1,0 +1,19 @@
+@import 'mixin_utama';
+
+.aksi {
+    width: fit-content;
+    // background-color: blue;
+    margin-left: 20px;
+    margin-top: 20px;
+    
+    a {
+        background-color: #6E7BD9;
+        padding: 10px 30px;
+        color: white;
+        font-size: large;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}
