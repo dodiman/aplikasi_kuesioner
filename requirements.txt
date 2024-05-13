@@ -10,3 +10,4 @@ Flask-RESTful==0.*
 Flask-Login==0.*
 Flask-Bcrypt==1.*
 Flask-Migrate==4.*
+mysqlclient==2.*

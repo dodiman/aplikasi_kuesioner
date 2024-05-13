@@ -5,6 +5,8 @@
 1. install package yang diperlukan di dalam pembuatan project
 pip install -r requirements.txt
 
+    --> import database (file sql nya)
+
 2. jalankan server
 python -m flask --app app.py run --debug
 
