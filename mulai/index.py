@@ -273,22 +273,27 @@ class Jawaban_responden(Resource):
     def get(self):
         return {"pesan": "oke"}, 200
     
+    # simpan jawaban responden
     def post(self):
         mydata = request.json
 
         biodata = mydata['biodata']
         jawaban = mydata['jawaban']
+        # bukti_ = mydata['bukti_']
 
         # simpan responden
-        responden = Responden.query.filter_by(nama=biodata["nama"], alamat=biodata["alamat"]).first()
+        responden = Responden.query.filter_by(nama=biodata["nama"], nip=biodata["nip"]).first()
         if responden: # jika sudah ada di database
-            pass
+            print("responden baru")
         else:
-            responden = Responden(nama=biodata["nama"], alamat=biodata["alamat"])
+            responden = Responden(nama=biodata["nama"], nip=biodata["nip"], jabatan=biodata["jabatan"], asal_instansi=biodata["asal_instansi"], no_hp=biodata["no_hp"], email=biodata["email"])
             db.session.add(responden)
             db.session.commit()
+            print("data responden berhasil disimpan")
 
         arr = []
+
+        print(jawaban)
 
         for i, v in jawaban.items():
             kuis = db.get_or_404(Kuis, i)

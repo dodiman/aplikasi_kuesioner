@@ -1,6 +1,7 @@
 -- install pacakgae untuk pembuatan virtual environment python
    pip install virtualenv
 --- buat virtual environment python
+   python -m venv "myenv"
 
 1. install package yang diperlukan di dalam pembuatan project
 pip install -r requirements.txt

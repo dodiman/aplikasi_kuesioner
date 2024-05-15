@@ -48,13 +48,22 @@ class Responden(db.Model):
     __tablename__ = "responden"
     id = db.Column(db.Integer, primary_key=True)
     nama = db.Column(db.String(50), nullable=False)
-    alamat = db.Column(db.String(50), nullable=False)
+    nip = db.Column(db.String(50), nullable=False)
+    jabatan = db.Column(db.String(50), nullable=False)
+    asal_instansi = db.Column(db.String(50), nullable=False)
+    no_hp = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(50), nullable=False)
     date_created = db.Column(db.DateTime, default=datetime.now)
     jawaban = db.relationship('JawabanResponden', backref="responden", lazy=True)
+
+    
 
 class JawabanResponden(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     responden_id = db.Column(db.Integer, db.ForeignKey('responden.id'), nullable=False)
     kuis_id = db.Column(db.Integer, db.ForeignKey('kuis.id'), nullable=False)
     jawaban = db.Column(db.String(50))
+    bukti_pelaksanaan = db.Column(db.String(50), default="", nullable=True)
     date_created = db.Column(db.DateTime, default=datetime.now)
+
+    
