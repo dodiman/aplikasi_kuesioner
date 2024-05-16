@@ -27,6 +27,32 @@ bp = Blueprint('mulai', __name__, url_prefix='/mulai')
 
 api = Api(bp)
 
+# -------------------------------------------- decorator -----------------
+def harus_login(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        if current_user.is_authenticated:
+            pass
+        else:
+            return redirect(url_for("mulai.halaman_login"))
+        
+        return func(*args, **kwargs)
+
+    return wrapper
+
+def akses_untuk(roles=[]):
+    def my_decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            if current_user.role in roles:
+                return func(*args, **kwargs)
+            
+            logout_user()
+            return redirect(url_for("mulai.halaman_login"))
+        
+        return wrapper
+    return my_decorator
+
 # -------------------------------------------- route api -----------------
 class Mulai_kompres(Resource):
     def get(self):
@@ -384,6 +410,8 @@ def index_staf():
     return render_template("staf/index.html", **context)
 
 @bp.route("/edit_kategori/<int:id>", methods=["GET", "POST"])
+@harus_login
+@akses_untuk(["admin"])
 def edit_kategori(id):
     if request.method == "GET":
         kategori = db.get_or_404(Kategori, id)
@@ -403,6 +431,8 @@ def edit_kategori(id):
         return redirect(url_for('mulai.halaman_kategori'))
 
 @bp.route("/edit_kuis/<int:id>", methods=["GET", "POST"])
+@harus_login
+@akses_untuk(["admin"])
 def edit_kuis(id):
     if request.method == "GET":
         kuis = db.get_or_404(Kuis, id)
@@ -433,11 +463,15 @@ def edit_kuis(id):
 
 
 @bp.route("/kategori", methods=["GET"])
+@harus_login
+@akses_untuk(["admin"])
 def halaman_kategori():
     context = {}
     return render_template("staf/kategori.html", **context)
 
 @bp.route("/kuis", methods=["GET"])
+@harus_login
+@akses_untuk(["admin"])
 def halaman_kuis():
     context = {
         "kategori": Kategori.query.all()
@@ -450,11 +484,14 @@ def halaman_responden():
     return render_template("responden/responden.html", **context)
 
 @bp.route("/pimpinan", methods=["GET"])
+@harus_login
+@akses_untuk(["admin", "pimpinan"])
 def halaman_pimpinan():
-    if current_user.is_authenticated:
-        pass
-    else:
-        return redirect(url_for("mulai.halaman_login"))
+    # if current_user.is_authenticated:
+    #     pass
+    # else:
+    #     return redirect(url_for("mulai.halaman_login"))
+    
 
     jawaban_responden = JawabanResponden.query.all()
     kuis = Kuis.query.all()
@@ -495,6 +532,9 @@ def halaman_login():
 
         if user:
             login_user(user)
+            if current_user.role == "admin":
+                return redirect(url_for("mulai.halaman_mulai"))
+            
             return redirect(url_for("mulai.halaman_pimpinan"))
 
         context = {}
@@ -510,8 +550,10 @@ def halaman_logout():
 
 
 @bp.route('', methods=["GET", "POST"])
+@harus_login
+@akses_untuk(["admin"])
 def halaman_mulai():
-    print("------------------------------------")
+    # print("------------------------------------")
     # if request.method == 'POST':
     #     print("selamat ini adalah post")
     #     file = request.files.get("mydata")

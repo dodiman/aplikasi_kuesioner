@@ -30,7 +30,7 @@ class Kategori(db.Model):
     __tablename__ = "kategori"
     id = db.Column(db.Integer, primary_key=True)
     kategori = db.Column(db.String(100))
-    kuis = db.relationship('Kuis', backref='kategori', lazy=True, cascade='all, delete-orphan')
+    kuis = db.relationship('Kuis', backref='kategori', cascade='all, delete')
     date_created = db.Column(db.DateTime, default=datetime.now)
     date_modified = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
