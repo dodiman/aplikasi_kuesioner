@@ -60,36 +60,66 @@
     transform: rotate(1turn);
   }
 }
-.kotak-judul {
-  margin: 0 20px;
-  padding: 10px 0;
-}
-.kotak-judul h2 {
-  font-size: #233aea;
-  color: rgb(11, 30, 134);
-  font-weight: 900;
-}
-
-.gambar-centang {
-  width: 20px;
-  height: auto;
-}
-
-.kolom-centang {
-  width: 80px;
-  overflow: hidden;
-}
-
-.menu {
-  top: 10px;
-}
-
-.tombol_detail {
+.kotak-biodata {
   border-color: black;
   border-style: solid;
   border-width: 1pt;
   border-width: 1px;
   border-width: solid;
-  padding: 3px 10px;
+  width: 40%;
+  overflow: auto;
+  margin: 10px 20px;
+  padding: 10px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  position: relative;
+}
+.kotak-biodata h2 {
+  width: 100%;
+  font-size: large;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+.kotak-biodata .grup {
+  width: 100%;
+  display: flex;
+}
+.kotak-biodata .grup .key {
+  width: 20%;
+  font-size: medium;
+  opacity: 0.5;
   text-transform: capitalize;
-}/*# sourceMappingURL=halaman_pimpinan.css.map */
+}
+.kotak-biodata .grup .value {
+  flex-grow: 1;
+  font-size: large;
+  text-transform: capitalize;
+}
+.kotak-biodata .kotak-cetak {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+.kotak-biodata .kotak-cetak .tombol_cetak {
+  border-color: black;
+  border-style: solid;
+  border-width: 1pt;
+  border-width: 1px;
+  border-width: solid;
+  padding: 10px 20px;
+  cursor: pointer;
+  text-transform: capitalize;
+  font-size: small;
+  transition: all 0.3s ease;
+}
+.kotak-biodata .kotak-cetak .tombol_cetak:hover {
+  opacity: 0.8;
+  background-color: #B19C66;
+  color: white;
+  border: none;
+}
+
+iframe {
+  display: none;
+}/*# sourceMappingURL=detail_laporan.css.map */

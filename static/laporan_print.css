@@ -60,36 +60,51 @@
     transform: rotate(1turn);
   }
 }
-.kotak-judul {
-  margin: 0 20px;
-  padding: 10px 0;
+@media print {
+  /* Hide default browser header and footer */
+  @page {
+    margin: 0;
+  }
+  body {
+    margin: 1cm; /* Add some margin to the content */
+  }
+  /* Example of other styles you might want to apply for printing */
+  .no-print {
+    display: none;
+  }
+  /* You can customize any other styles specific to print here */
 }
-.kotak-judul h2 {
-  font-size: #233aea;
-  color: rgb(11, 30, 134);
-  font-weight: 900;
+.kotak-tabel1 {
+  margin: 10px 20px;
+  display: flex;
 }
-
-.gambar-centang {
-  width: 20px;
-  height: auto;
-}
-
-.kolom-centang {
-  width: 80px;
-  overflow: hidden;
-}
-
-.menu {
-  top: 10px;
-}
-
-.tombol_detail {
+.kotak-tabel1 table, .kotak-tabel1 th, .kotak-tabel1 td {
   border-color: black;
   border-style: solid;
   border-width: 1pt;
   border-width: 1px;
   border-width: solid;
-  padding: 3px 10px;
-  text-transform: capitalize;
-}/*# sourceMappingURL=halaman_pimpinan.css.map */
+  border-collapse: collapse;
+}
+.kotak-tabel1 th {
+  padding: 10px 0;
+}
+.kotak-tabel1 .td_no {
+  width: 40px;
+}
+.kotak-tabel1 .td_jawab {
+  width: 50px;
+}
+.kotak-tabel1 .td_pertanyaan {
+  padding: 0 5px;
+}
+.kotak-tabel1 .td_bukti_pelaksanaan {
+  padding: 0 5px;
+}
+.kotak-tabel1 .td_center {
+  text-align: center;
+}
+
+.kotak-biodata .grup .key {
+  width: 40%;
+}/*# sourceMappingURL=laporan_print.css.map */

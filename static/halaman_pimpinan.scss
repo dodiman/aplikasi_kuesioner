@@ -27,3 +27,10 @@
 .menu {
     top: 10px;
 }
+
+.tombol_detail {
+    @include garis;
+    padding: 3px 10px;
+    // margin: 5px 0;
+    text-transform: capitalize;
+}

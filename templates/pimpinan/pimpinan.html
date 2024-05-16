@@ -3,6 +3,8 @@
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename="halaman_utama.css") }}" />
 <link rel="stylesheet" href="{{ url_for('static', filename="halaman_kuis.css") }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename="halaman_responden.css") }}" />
+
 <link rel="stylesheet" href="{{ url_for('static', filename="halaman_pimpinan.css") }}" />
 {% endblock %}
 
@@ -12,10 +14,37 @@
 
 
 <div class="kotak-judul">
-    <h2>Laporan</h2>
+    <!-- <h2>Laporan</h2> -->
     <br />
 </div>
 
+<div class="form-tambah" id="kotak_biodata">
+    <div class="header">
+        <h2>Instansi</h2>
+    </div>
+    <form method="post" id="form_biodata" class="myform">
+        <div class="input">
+            <label for="instansi">
+                instansi
+            </label>
+            <select name="instansi">
+                <option value="">---</option>
+                {% for value in data_instansi %}
+                <option value="{{ value.asal_instansi }}">{{ value.asal_instansi }}</option>
+                {% endfor %}
+            </select>
+            <!-- <input name="instansi" id="instansi" type="text" placeholder="..." required /> -->
+        </div>
+        
+        <div class="input">
+            <span></span>
+            <button>PILIH</button>
+        </div>
+    </form>
+</div>
+
+
+{% if request.method == "POST" %}
 <div class="kotak-tabel">
 
     <table>
@@ -23,42 +52,32 @@
         <tr>
             <th>No</th>
             <th>Responden</th>
-            <th>Kategori</th>
-            <th>Kuesioner</th>
-            <th>Ya</th>
-            <th>Tidak</th>
-            <th>Bukti Pelaksanaan</th>
+            <th>Instansi</th>
+            <th>Tanggal</th>
+            <th>Aksi</th>
+            
         </tr>
     </thead>
     <tbody id="tbody">
-        {% for value in laporan %}
+        {% for value in responden %}
         <tr>
             <td>{{ loop.index }}</td>
-            <td>{{ value.responden }}</td>
-            <td>{{ value.kategori }}</td>
-            <td>{{ value.teks }}</td>
-            <td id="jawaban_benar" class="kolom-centang">
-                {% if value.jawaban == "Benar" %}
-                <img src="{{ url_for('static', filename='img/centang.png') }}" alt="centang" class="gambar-centang">
-                {% endif %}
-            </td>
-            <td id="jawaban_salah" class="kolom-centang">
-                {% if not value.jawaban == "Benar" %}
-                <img src="{{ url_for('static', filename='img/centang.png') }}" alt="centang" class="gambar-centang">
-                
-                {% endif %}
-            </td>
-            <td><a id="bukti_pelaksanaan_link" href="{{ value.bukti_pelaksanaan }}">{{ value.bukti_pelaksanaan }}</a></td>
+            <td>{{ value.nama }}</td>
+            <td>{{ value.asal_instansi }}</td>
+            <td>{{ value.date_created.strftime('%Y-%m-%d') }}</td>
+            <td><a class="tombol_detail" href="{{ url_for('mulai.detail_laporan', id=value.id) }}">detail</a></td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
 </div>
+
+{% endif %}
     
 {% endblock %}
 
 {% block script %}
 <script src="{{ url_for('static', filename="js/axios.min.js") }}"></script>
-<script src="{{ url_for('static', filename="js/pimpinan/laporan.js") }}"></script>
+<script src="{{ url_for('static', filename="js/pimpinan/pimpinan.js") }}"></script>
 
 {% endblock %}

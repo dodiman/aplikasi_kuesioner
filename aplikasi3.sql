@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2024 at 06:33 AM
+-- Generation Time: May 17, 2024 at 01:04 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -60,7 +60,19 @@ CREATE TABLE `jawaban_responden` (
 INSERT INTO `jawaban_responden` (`id`, `responden_id`, `kuis_id`, `jawaban`, `bukti_pelaksanaan`, `date_created`) VALUES
 (1, 1, 7, 'salah', '', '2024-05-16 12:32:06'),
 (2, 1, 8, 'Benar', 'https://www.google.com/', '2024-05-16 12:32:06'),
-(3, 1, 9, 'salah', '', '2024-05-16 12:32:06');
+(3, 1, 9, 'salah', '', '2024-05-16 12:32:06'),
+(4, 2, 7, 'Benar', 'https://www.google.com', '2024-05-16 18:19:16'),
+(5, 2, 8, 'salah', '', '2024-05-16 18:19:16'),
+(6, 2, 9, 'Benar', 'https://www.youtube.com', '2024-05-16 18:19:16'),
+(7, 3, 7, 'Benar', 'https://www.google.com', '2024-05-16 18:22:20'),
+(8, 3, 8, 'Benar', 'https://www.youtube.com', '2024-05-16 18:22:20'),
+(9, 3, 9, 'Benar', 'https://www.youtube.com', '2024-05-16 18:22:20'),
+(10, 4, 7, 'salah', '', '2024-05-17 06:54:31'),
+(11, 4, 8, 'Benar', 'https://www.youtube.com', '2024-05-17 06:54:31'),
+(12, 4, 9, 'salah', '', '2024-05-17 06:54:31'),
+(13, 5, 7, 'salah', '', '2024-05-17 06:59:20'),
+(14, 5, 8, 'Benar', 'https://www.youtube.com', '2024-05-17 06:59:20'),
+(15, 5, 9, 'Benar', 'https://www.youtube.com', '2024-05-17 06:59:20');
 
 -- --------------------------------------------------------
 
@@ -143,7 +155,11 @@ CREATE TABLE `responden` (
 --
 
 INSERT INTO `responden` (`id`, `nama`, `nip`, `jabatan`, `asal_instansi`, `no_hp`, `email`, `date_created`) VALUES
-(1, 'Budi', '1324', 'Kepala Dinas', 'Dinas Pendidikan', '234', 'budi@gmail.com', '2024-05-16 12:32:06');
+(1, 'Budi', '1324', 'Kepala Dinas', 'Dinas Pendidikan', '234', 'budi@gmail.com', '2024-05-16 12:32:06'),
+(2, 'Andi', '123', 'staf', 'Dinas Pendidikan', '1234', 'andi@gmail.com', '2024-05-16 18:19:16'),
+(3, 'abc', '123', 'ad', 'df', 'sdf', 'a@gmail.com', '2024-05-16 18:22:20'),
+(4, 'Hasim', '11111', 'staf', 'Dinas Perikanan', '1324', 'a@dian', '2024-05-17 06:54:31'),
+(5, 'Mila', '1234', 'staf', 'Dinas Sosial', '234', 'm@gmail.com', '2024-05-17 06:59:20');
 
 -- --------------------------------------------------------
 
@@ -225,7 +241,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `jawaban_responden`
 --
 ALTER TABLE `jawaban_responden`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `kategori`
@@ -249,7 +265,7 @@ ALTER TABLE `profile`
 -- AUTO_INCREMENT for table `responden`
 --
 ALTER TABLE `responden`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user`

@@ -483,40 +483,110 @@ def halaman_responden():
     context = {}
     return render_template("responden/responden.html", **context)
 
-@bp.route("/pimpinan", methods=["GET"])
+@bp.route("/pimpinan", methods=["GET", "POST"])
 @harus_login
 @akses_untuk(["admin", "pimpinan"])
 def halaman_pimpinan():
-    # if current_user.is_authenticated:
-    #     pass
-    # else:
-    #     return redirect(url_for("mulai.halaman_login"))
-    
+    if request.method == "POST":
+        instansi  = request.form["instansi"]
 
-    jawaban_responden = JawabanResponden.query.all()
-    kuis = Kuis.query.all()
-    data = []
-    for k in kuis:
-        for j in k.jawaban:
-            temp = {
-                "kategori": k.kategori.kategori, 
-                "teks": k.teks,
-                "jawaban": j.jawaban,
-                "bukti_pelaksanaan": j.bukti_pelaksanaan,
-                "responden": j.responden.nama
-            }
-            data.append(temp)
+        data_instansi = Responden.query.all()
+        data_responden = Responden.query.filter(Responden.asal_instansi == instansi).all()
+        # hhh
+
+        data = set()
+        for value in data_instansi:
+            data.add(value.asal_instansi)
+        data = {
+            "asal_instansi": list(data)
+        }
+
+        data_instansi = pd.DataFrame(data)
+
+        data_instansi = data_instansi.to_dict(orient="records")
+
+        context = {
+            "responden": data_responden,
+            "data_instansi": data_instansi
+        }
+        return render_template("pimpinan/pimpinan.html", **context)
+      
+
+    data_instansi = Responden.query.all()
+
+    data = set()
+    for value in data_instansi:
+        data.add(value.asal_instansi)
+    data = {
+        "asal_instansi": list(data)
+    }
+
+    data_instansi = pd.DataFrame(data)
+    data_instansi = data_instansi.to_dict(orient="records")
+
+    context = {
+        "data_instansi": data_instansi
+    }
+
+    # jawaban_responden = JawabanResponden.query.all()
+    # kuis = Kuis.query.all()
+    # data_responden = Responden.query.all()
+
+    # data = []
+    # for k in kuis:
+    #     for j in k.jawaban:
+    #         temp = {
+    #             "kategori": k.kategori.kategori, 
+    #             "teks": k.teks,
+    #             "jawaban": j.jawaban,
+    #             "bukti_pelaksanaan": j.bukti_pelaksanaan,
+    #             "responden": j.responden.nama
+    #         }
+    #         data.append(temp)
             
-            # print(f"Responden: {j.responden.nama}")
+    #         # print(f"Responden: {j.responden.nama}")
 
+    # laporan = pd.DataFrame(data)
+    # laporan.sort_values(by=["kategori", "responden"], inplace=True, ascending=True)
+    # laporan = laporan.to_dict(orient="records")
+
+    # context = {
+    #     "laporan": laporan
+    # }
+
+    # context = {
+    #     "responden": data_responden
+    # }
+
+
+    return render_template("pimpinan/pimpinan.html", **context)
+
+@bp.route("/detail_laporan/<int:id>", methods=["GET", "POST"])
+@harus_login
+@akses_untuk(["admin", "pimpinan"])
+def detail_laporan(id):
+
+    responden = db.get_or_404(Responden, id)
+    jawaban = responden.jawaban
+
+    data = []
+    for value in responden.jawaban:
+        # for va in value.kuis:
+        temp = {
+            "kuis": value.kuis,
+            "jawaban": value
+        }
+        data.append(temp)
+    
     laporan = pd.DataFrame(data)
-    laporan.sort_values(by=["kategori", "responden"], inplace=True, ascending=True)
     laporan = laporan.to_dict(orient="records")
 
     context = {
+        "responden": responden,
+        "jawaban": jawaban,
         "laporan": laporan
     }
-    return render_template("pimpinan/pimpinan.html", **context)
+    return render_template("pimpinan/detail_laporan.html", **context)
 
 @bp.route("/login", methods=["GET", "POST"])
 def halaman_login():
@@ -540,6 +610,35 @@ def halaman_login():
         context = {}
 
         return render_template("login.html", **context)
+
+@bp.route("/laporan_print/<int:id>", methods=["GET"])
+@harus_login
+@akses_untuk(["admin", "pimpinan"])
+def laporan_print(id):
+
+    responden = db.get_or_404(Responden, id)
+    jawaban = responden.jawaban
+
+    data = []
+    for value in responden.jawaban:
+        # for va in value.kuis:
+        temp = {
+            "kuis": value.kuis,
+            "jawaban": value
+        }
+        data.append(temp)
+    
+    laporan = pd.DataFrame(data)
+    laporan = laporan.to_dict(orient="records")
+
+    context = {
+        "responden": responden,
+        "jawaban": jawaban,
+        "laporan": laporan
+    }
+    
+    return render_template("pimpinan/laporan_print.html", **context)
+
 
 @bp.route("/logout", methods=["GET"])
 def halaman_logout():

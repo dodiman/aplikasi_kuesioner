@@ -46,7 +46,7 @@
                 text-transform: capitalize;
             }
 
-            input {
+            input, select {
                 // width: 50%;
                 flex-grow: 1;
                 padding: 10px;
@@ -56,6 +56,10 @@
                     outline: 2px solid rgb(206, 166, 166);
                 }
 
+            }
+
+            select {
+                cursor: pointer;
             }
 
             button {

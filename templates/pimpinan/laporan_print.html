@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename="halaman_utama.css") }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename="halaman_kuis.css") }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename="halaman_pimpinan.css") }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename="detail_laporan.css") }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename="laporan_print.css") }}" />
+
+{% endblock %}
+
+{% block content %}
+
+
+
+<div class="kotak-biodata">
+    <h2>{{ responden.nama }}</h2>
+    <div class="grup">
+        <div class="key">N I P</div>
+        <div class="value">{{ responden.nip }}</div>
+    </div>
+    <div class="grup">
+        <div class="key">jabatan</div>
+        <div class="value">{{ responden.jabatan }}</div>
+    </div>
+    <div class="grup">
+        <div class="key">Instansi</div>
+        <div class="value">{{ responden.asal_instansi }}</div>
+    </div>
+    <div class="grup">
+        <div class="key">No Hp</div>
+        <div class="value">{{ responden.no_hp }}</div>
+    </div>
+    <div class="grup">
+        <div class="key">email</div>
+        <div class="value">{{ responden.email }}</div>
+    </div>
+
+    
+    
+</div>
+
+
+<div class="kotak-tabel1">
+
+    <table>
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Pertanyaan</th>
+            <th>Ya</th>
+            <th>Tidak</th>
+            <th>Bukti Pelaksanaan</th>
+            
+        </tr>
+    </thead>
+    <tbody id="tbody">
+        {% for value in laporan %}
+        <tr>
+            <td class="td_center td_no">{{ loop.index }}</td>
+            <td class="td_pertanyaan">{{ value.kuis.teks }}</td>
+            <td id="jawaban_benar" class="kolom-centang td_center td_jawab">
+                {% if value.jawaban.jawaban == "Benar" %}
+                <img src="{{ url_for('static', filename='img/centang.png') }}" alt="centang" class="gambar-centang">
+                {% endif %}
+            </td>
+            <td id="jawaban_salah" class="kolom-centang td_center td_jawab">
+                {% if not value.jawaban.jawaban == "Benar" %}
+                <img src="{{ url_for('static', filename='img/centang.png') }}" alt="centang" class="gambar-centang">
+                
+                {% endif %}
+            </td>
+            <td class="td_bukti_pelaksanaan"><a href="{{ value.jawaban.bukti_pelaksanaan }}">{{ value.jawaban.bukti_pelaksanaan }}</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+    
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename="js/axios.min.js") }}"></script>
+<script src="{{ url_for('static', filename="js/pimpinan/detail_laporan.js") }}"></script>
+
+{% endblock %}

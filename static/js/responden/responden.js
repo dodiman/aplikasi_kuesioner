@@ -49,7 +49,7 @@ async function fecth_data_kumpulan_kuis(elm) {
             jawaban_benar_elm.setAttribute("type", "radio");
 
             const label_benar_elm = document.createElement("label");
-            label_benar_elm.textContent = "Benar";
+            label_benar_elm.textContent = "Ya";
             // label_benar_elm.style.display = "block";
             label_benar_elm.setAttribute("for", `benar${item.id}`);
 
@@ -60,7 +60,7 @@ async function fecth_data_kumpulan_kuis(elm) {
             jawaban_salah_elm.setAttribute("type", "radio");
 
             const label_salah_elm = document.createElement("label");
-            label_salah_elm.textContent = "Salah";
+            label_salah_elm.textContent = "Tidak";
             // label_salah_elm.style.display = "block";
             label_salah_elm.setAttribute("for", `salah${item.id}`);
             
