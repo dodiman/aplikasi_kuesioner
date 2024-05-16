@@ -4,7 +4,7 @@
     // @include garis;
     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
     background-color: white;
-    width: 35%;
+    width: 40%;
     margin-top: 20px;
     margin-bottom: 20px;
     margin-left: 20px;
@@ -25,6 +25,8 @@
         padding: 10px 30px;
         display: flex;
         flex-wrap: wrap;
+        overflow: hidden;
+        // justify-content: start;
 
         .input {
             // @include garis;
@@ -34,6 +36,7 @@
             justify-content: start;
             background-color: transparent;
             margin-bottom: 10px;
+            overflow: hidden;
             
             label, span {
                 // @include garis;
@@ -46,7 +49,8 @@
                 text-transform: capitalize;
             }
 
-            input {
+            input, select {
+                // @include garis;
                 // width: 50%;
                 flex-grow: 1;
                 padding: 10px;

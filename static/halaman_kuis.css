@@ -63,7 +63,7 @@
 .form-tambah-kuis {
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
   background-color: white;
-  width: 35%;
+  width: 40%;
   margin-top: 20px;
   margin-bottom: 20px;
   margin-left: 20px;
@@ -82,6 +82,7 @@
   padding: 10px 30px;
   display: flex;
   flex-wrap: wrap;
+  overflow: hidden;
 }
 .form-tambah-kuis .myform .input {
   width: 100%;
@@ -90,6 +91,7 @@
   justify-content: start;
   background-color: transparent;
   margin-bottom: 10px;
+  overflow: hidden;
 }
 .form-tambah-kuis .myform .input label, .form-tambah-kuis .myform .input span {
   color: #484541;
@@ -99,12 +101,12 @@
   text-align: left;
   text-transform: capitalize;
 }
-.form-tambah-kuis .myform .input input {
+.form-tambah-kuis .myform .input input, .form-tambah-kuis .myform .input select {
   flex-grow: 1;
   padding: 10px;
   border: 1px solid #ccc;
 }
-.form-tambah-kuis .myform .input input:focus {
+.form-tambah-kuis .myform .input input:focus, .form-tambah-kuis .myform .input select:focus {
   outline: 2px solid rgb(206, 166, 166);
 }
 .form-tambah-kuis .myform .input button {
