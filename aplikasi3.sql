@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2024 at 01:52 AM
+-- Generation Time: May 16, 2024 at 06:33 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -36,7 +36,7 @@ CREATE TABLE `alembic_version` (
 --
 
 INSERT INTO `alembic_version` (`version_num`) VALUES
-('aea3d30bab4e');
+('852d672e8871');
 
 -- --------------------------------------------------------
 
@@ -49,6 +49,7 @@ CREATE TABLE `jawaban_responden` (
   `responden_id` int(11) NOT NULL,
   `kuis_id` int(11) NOT NULL,
   `jawaban` varchar(50) DEFAULT NULL,
+  `bukti_pelaksanaan` varchar(50) DEFAULT NULL,
   `date_created` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -56,17 +57,10 @@ CREATE TABLE `jawaban_responden` (
 -- Dumping data for table `jawaban_responden`
 --
 
-INSERT INTO `jawaban_responden` (`id`, `responden_id`, `kuis_id`, `jawaban`, `date_created`) VALUES
-(10, 6, 3, 'salah', '2024-05-12 03:35:33'),
-(11, 6, 5, 'salah', '2024-05-12 03:35:33'),
-(12, 6, 6, 'Benar', '2024-05-12 03:35:33'),
-(13, 6, 8, 'salah', '2024-05-12 03:35:33'),
-(14, 7, 3, 'salah', '2024-05-12 03:40:53'),
-(15, 7, 6, 'Benar', '2024-05-12 03:41:04'),
-(16, 8, 3, 'Benar', '2024-05-12 03:44:43'),
-(17, 6, 9, 'salah', '2024-05-13 05:27:30'),
-(18, 6, 11, 'salah', '2024-05-13 05:27:30'),
-(19, 6, 12, 'Benar', '2024-05-13 05:27:30');
+INSERT INTO `jawaban_responden` (`id`, `responden_id`, `kuis_id`, `jawaban`, `bukti_pelaksanaan`, `date_created`) VALUES
+(1, 1, 7, 'salah', '', '2024-05-16 12:32:06'),
+(2, 1, 8, 'Benar', 'https://www.google.com/', '2024-05-16 12:32:06'),
+(3, 1, 9, 'salah', '', '2024-05-16 12:32:06');
 
 -- --------------------------------------------------------
 
@@ -86,9 +80,11 @@ CREATE TABLE `kategori` (
 --
 
 INSERT INTO `kategori` (`id`, `kategori`, `date_created`, `date_modified`) VALUES
-(1, 'UMUM', '2024-05-11 03:21:08', '2024-05-13 07:07:51'),
-(2, 'KHUSUS', '2024-05-11 03:21:11', '2024-05-13 07:07:58'),
-(3, 'SPESIAL', '2024-05-11 03:21:15', '2024-05-13 07:08:04');
+(1, 'UMUM', '2024-05-16 12:25:27', '2024-05-16 12:25:27'),
+(2, 'KHUSUS', '2024-05-16 12:25:31', '2024-05-16 12:25:31'),
+(3, 'SPESIAL', '2024-05-16 12:25:37', '2024-05-16 12:25:37'),
+(5, 'ANEH', '2024-05-16 12:25:50', '2024-05-16 12:25:50'),
+(6, 'AMAZING', '2024-05-16 12:27:35', '2024-05-16 12:27:35');
 
 -- --------------------------------------------------------
 
@@ -109,13 +105,9 @@ CREATE TABLE `kuis` (
 --
 
 INSERT INTO `kuis` (`id`, `teks`, `date_created`, `kategori_id`, `date_modified`) VALUES
-(3, 'Ikan bernafas dengan paru-paru', '2024-05-11 06:24:14', 1, '2024-05-12 21:44:00'),
-(5, 'Indonesia termaksud negara maju', '2024-05-11 06:45:01', 2, '2024-05-13 07:06:29'),
-(6, 'Amerika ibu kotanya New York', '2024-05-11 06:51:58', 2, '2024-05-13 04:02:29'),
-(8, 'Batu tenggelam dalam air laut', '2024-05-11 15:14:00', 1, '2024-05-12 16:57:36'),
-(9, 'Indonesia ibukotanya Jakarta', '2024-05-12 18:09:57', 1, '2024-05-13 07:06:46'),
-(11, 'Sorong terletak dipulau Jawa', '2024-05-12 18:30:31', 1, '2024-05-13 07:07:11'),
-(12, 'Ikan bernafas dengan paru-paru', '2024-05-12 21:47:18', 1, '2024-05-13 07:07:34');
+(7, 'Pulau Terbesar di Indonesia adalah Pulau Jawa', '2024-05-16 12:30:51', 1, '2024-05-16 12:30:51'),
+(8, 'Presiden Indoensia pertama adalah SBY', '2024-05-16 12:31:10', 1, '2024-05-16 12:31:10'),
+(9, 'Manusia bernafas dengan paru-paru', '2024-05-16 12:31:24', 2, '2024-05-16 12:31:24');
 
 -- --------------------------------------------------------
 
@@ -138,7 +130,11 @@ CREATE TABLE `profile` (
 CREATE TABLE `responden` (
   `id` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
-  `alamat` varchar(50) NOT NULL,
+  `nip` varchar(50) NOT NULL,
+  `jabatan` varchar(50) NOT NULL,
+  `asal_instansi` varchar(50) NOT NULL,
+  `no_hp` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `date_created` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -146,10 +142,8 @@ CREATE TABLE `responden` (
 -- Dumping data for table `responden`
 --
 
-INSERT INTO `responden` (`id`, `nama`, `alamat`, `date_created`) VALUES
-(6, 'budi', 'takimpo', '2024-05-12 03:24:26'),
-(7, 'andi', 'pasarwajo', '2024-05-12 03:40:53'),
-(8, 'rudi', 'takimpo', '2024-05-12 03:44:11');
+INSERT INTO `responden` (`id`, `nama`, `nip`, `jabatan`, `asal_instansi`, `no_hp`, `email`, `date_created`) VALUES
+(1, 'Budi', '1324', 'Kepala Dinas', 'Dinas Pendidikan', '234', 'budi@gmail.com', '2024-05-16 12:32:06');
 
 -- --------------------------------------------------------
 
@@ -231,19 +225,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `jawaban_responden`
 --
 ALTER TABLE `jawaban_responden`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `kuis`
 --
 ALTER TABLE `kuis`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `profile`
@@ -255,13 +249,13 @@ ALTER TABLE `profile`
 -- AUTO_INCREMENT for table `responden`
 --
 ALTER TABLE `responden`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
