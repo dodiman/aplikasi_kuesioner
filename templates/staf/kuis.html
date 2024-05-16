@@ -16,7 +16,7 @@
     <form method="post" id="myform" class="myform">
         <div class="input">
             <label for="teks">
-                teks
+                Pertanyaan
             </label>
             <input name="teks" id="teks" type="text" placeholder="..." required />
         </div>
@@ -24,7 +24,13 @@
             <label for="kategori">
                 kategori
             </label>
-            <input name="kategori" id="kategori" type="text" placeholder="..." required />
+            <!-- <input name="kategori" id="kategori" type="text" placeholder="..." required /> -->
+            <select name="kategori" id="kategori">
+                <option value="">---</option>
+                {% for value in kategori %}
+                    <option value="{{ value.id }}">{{ value.kategori }}</option>
+                {% endfor %}
+            </select>
         </div>
 
         <div class="input">
@@ -42,7 +48,7 @@
             <tr>
                 <th class="rata-tengah">No</th>
                 <th>Teks</th>
-                <th>Kategori</th>
+                <th>Kategori (id)</th>
                 <th class="rata-tengah">#</th>
             </tr>
         </thead>

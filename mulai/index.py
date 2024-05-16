@@ -223,7 +223,7 @@ class Kategori_api(Resource):
 class Kuis_api(Resource):
     def get(self):
 
-        kat = Kuis.query.all()
+        kat = Kuis.query.order_by(Kuis.date_created.desc()).all()
         mylist = []
         for i in kat:
             mydict = {
@@ -279,7 +279,6 @@ class Jawaban_responden(Resource):
 
         biodata = mydata['biodata']
         jawaban = mydata['jawaban']
-        # bukti_ = mydata['bukti_']
 
         # simpan responden
         responden = Responden.query.filter_by(nama=biodata["nama"], nip=biodata["nip"]).first()
@@ -293,17 +292,33 @@ class Jawaban_responden(Resource):
 
         arr = []
 
-        print(jawaban)
+        # print(jawaban)
+        # print("lihat")
 
-        for i, v in jawaban.items():
-            kuis = db.get_or_404(Kuis, i)
+        for i in jawaban:
+            if i["jawaban"] is None:
+                i["jawaban"] = ""
+            
+            kuis = db.get_or_404(Kuis, i["id"])
             temp = JawabanResponden.query.filter_by(responden_id=responden.id, kuis_id=kuis.id).first()
             if not temp:
-                temp = JawabanResponden(responden_id=responden.id, kuis_id=kuis.id, jawaban=v)
+                temp = JawabanResponden(responden_id=responden.id, kuis_id=kuis.id, jawaban=i["jawaban"], bukti_pelaksanaan=i["bukti_pelaksanaan"])
             else:
-                temp.jawaban = v
+                temp.jawaban = i["jawaban"]
+                temp.bukti_pelaksanaan = i["bukti_pelaksanaan"]
 
             arr.append(temp)
+            # print(i)
+
+        # for i, v in jawaban.items():
+        #     kuis = db.get_or_404(Kuis, i)
+        #     temp = JawabanResponden.query.filter_by(responden_id=responden.id, kuis_id=kuis.id).first()
+        #     if not temp:
+        #         temp = JawabanResponden(responden_id=responden.id, kuis_id=kuis.id, jawaban=v)
+        #     else:
+        #         temp.jawaban = v
+
+        #     arr.append(temp)
 
         # simpan jawaban banyak
         if arr:
@@ -392,8 +407,12 @@ def edit_kuis(id):
     if request.method == "GET":
         kuis = db.get_or_404(Kuis, id)
 
+        kategori_sekarang = kuis.kategori
+
         context = {
-            "kuis" :  kuis
+            "kuis" :  kuis,
+            "kategori_sekarang": kategori_sekarang,
+            "kategori": Kategori.query.all()
         }
         return render_template("staf/edit_kuis.html", **context)
 
@@ -420,7 +439,9 @@ def halaman_kategori():
 
 @bp.route("/kuis", methods=["GET"])
 def halaman_kuis():
-    context = {}
+    context = {
+        "kategori": Kategori.query.all()
+    }
     return render_template("staf/kuis.html", **context)
 
 @bp.route("/responden", methods=["GET"])
@@ -440,7 +461,14 @@ def halaman_pimpinan():
     data = []
     for k in kuis:
         for j in k.jawaban:
-            data.append({"kategori": k.kategori.kategori, "teks": k.teks, "jawaban": j.jawaban, "responden": j.responden.nama})
+            temp = {
+                "kategori": k.kategori.kategori, 
+                "teks": k.teks,
+                "jawaban": j.jawaban,
+                "bukti_pelaksanaan": j.bukti_pelaksanaan,
+                "responden": j.responden.nama
+            }
+            data.append(temp)
             
             # print(f"Responden: {j.responden.nama}")
 
@@ -483,15 +511,16 @@ def halaman_logout():
 
 @bp.route('', methods=["GET", "POST"])
 def halaman_mulai():
-    if request.method == 'POST':
-        print("selamat ini adalah post")
-        file = request.files.get("mydata")
-        file_content = np.frombuffer(file.read(), dtype=np.uint8)
+    print("------------------------------------")
+    # if request.method == 'POST':
+    #     print("selamat ini adalah post")
+    #     file = request.files.get("mydata")
+    #     file_content = np.frombuffer(file.read(), dtype=np.uint8)
 
-        data1 = modulku.Mydata()
-        data1.baca_data_dari_numpy(file_content)
-        tahapan = modulku.Langkah(data1)
-        tahapan.langka1()
+    #     data1 = modulku.Mydata()
+    #     data1.baca_data_dari_numpy(file_content)
+    #     tahapan = modulku.Langkah(data1)
+    #     tahapan.langka1()
 
 
     nama= "budi"

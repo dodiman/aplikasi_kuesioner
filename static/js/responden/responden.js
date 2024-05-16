@@ -31,6 +31,7 @@ async function fecth_data_kumpulan_kuis(elm) {
         const form_elm = document.createElement("form");
         form_elm.setAttribute("method", "post");
         
+        let kumpul_id_kuis = [];
         data.forEach((item) => {
             const group_elm = document.createElement("div");
             group_elm.classList.add("group");
@@ -70,6 +71,7 @@ async function fecth_data_kumpulan_kuis(elm) {
             const input_bukti = document.createElement("input");
             input_bukti.setAttribute("id", `bukti_pelaksanaan${item.id}`);
             input_bukti.setAttribute("name", `bukti_pelaksanaan${item.id}`);
+            // input_bukti.setAttribute("name", `bukti_pelaksanaan`);
             input_bukti.setAttribute("type", "text");
             input_bukti.style.width = "600px";
             input_bukti.style.padding = "0 10px";
@@ -116,7 +118,8 @@ async function fecth_data_kumpulan_kuis(elm) {
                 
             //     console.log(e.target);
             // })
-        });
+            kumpul_id_kuis.push(item.id);
+        });   // end perulangan
 
 
         const simpan_elm = document.createElement("button");
@@ -132,11 +135,33 @@ async function fecth_data_kumpulan_kuis(elm) {
 
                 // kumpul semua data untuk dikirimkan ke server
                 const jawaban_form = new FormData(form_elm);
+
                 
-                let obj3 = {}
-                jawaban_form.entries().forEach((item, index) => {
-                    obj3[item[0]] = item[1];
+                // console.log(jawaban_form.getAll("bukti_pelaksanaan"));
+                // console.log(jawaban_form.getAll("menjawab"));
+                // console.log(kumpul_id_kuis);
+
+                let data_isian = [];
+                kumpul_id_kuis.forEach(item => {
+                    let temp = {};
+                    temp["id"] = item;
+                    temp["jawaban"] = jawaban_form.get(`${item}`);
+                    temp["bukti_pelaksanaan"] = jawaban_form.get(`bukti_pelaksanaan${item}`);
+                    data_isian.push(temp);
                 });
+                console.log(data_isian);
+
+                
+                // let arr_data_jawaban = []
+                // jawaban_form.entries().forEach((item, index) => {
+                //     let obj3 = {}
+                //     obj3[item[0]] = item[1];
+                //     arr_data_jawaban.push(obj3);
+                // });
+
+                // console.log(arr_data_jawaban);
+
+                
 
                 // let a = localStorage.getItem("biodata");
 
@@ -147,14 +172,14 @@ async function fecth_data_kumpulan_kuis(elm) {
                 // kumpulkan data biodata dan jawaban kuis dalam satu object
                 let mydata = {
                     "biodata": JSON.parse(localStorage.getItem("biodata")),
-                    "jawaban": obj3
+                    "jawaban": data_isian
                 }
 
                 // simpan jawaban
                 jawaban_responden(mydata)
 
                 // window.open(url=BASE_URL, target="_blank");
-                window.location.href = `${BASE_URL}/mulai/responden`;
+                window.location.href = `${BASE_URL}/mulai/responden`;   // di arahkan kesini setelah poengisian
             }
         });
 

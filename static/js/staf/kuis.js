@@ -53,6 +53,7 @@ myform_elm.addEventListener("submit", async (e) => {
 
         myform_elm.reset();
 
+        // kembali memanggil data tabel
         fect_data();
 
     } catch (error) {

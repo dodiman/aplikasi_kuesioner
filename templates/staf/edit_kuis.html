@@ -18,17 +18,22 @@
     <form method="post" id="myform" class="myform">
         <div class="input">
             <label for="teks">
-                Teks
+                Pertanyaan
             </label>
             <input autofocus name="teks" id="teks" type="text" value="{{ kuis.teks }}" placeholder="..." required />
             
         </div>
         <div class="input">
             <label for="id_kategori">
-                Id_kategori
+                Kategori
             </label>
-            <input name="id_kategori" id="id_kategori" type="text" value="{{ kuis.kategori.id }}" placeholder="..." required />
-            
+            <!-- <input name="id_kategori" id="id_kategori" type="text" value="{{ kuis.kategori.id }}" placeholder="..." required /> -->
+            <select name="id_kategori" id="id_kategori">
+                <option value="{{ kategori_sekarang.id }}">{{ kategori_sekarang.kategori }}</option>
+                {% for value in kategori %}
+                    <option value="{{ value.id }}">{{ value.kategori }}</option>
+                {% endfor %}
+            </select>
         </div>
 
         <div class="input">
